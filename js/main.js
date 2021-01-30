@@ -4,19 +4,19 @@ const randomInteger  = (min, max) => {
   if (min < max) {
     return Math.round(rand);
   }
-  return ('Неверно указан числовой диапазон')
+  return new Error('Неверно указан числовой диапазон')
 }
 
-alert(randomInteger(0, 10));
+alert(randomInteger(110, 10));
 
 
 const randomFloatNumber = (min, max, floatPoint) => {
-  const randomFloatNumber = Math.random() * (max - min) + min;
+  const randomFloat = Math.random() * (max - min) + min;
 
   if (min < max) {
-    return randomFloatNumber.toFixed(floatPoint);
+    return randomFloat.toFixed(floatPoint);
   }
-  return ('Неверно указан числовой диапазон')
+  return new Error('Неверно указан числовой диапазон')
 }
 
 alert(randomFloatNumber(0, 10, 4));
