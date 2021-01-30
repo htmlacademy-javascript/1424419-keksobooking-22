@@ -1,22 +1,20 @@
 const randomInteger  = (min, max) => {
-  const rand = min - 0.5 + Math.random() * (max + 1 - min);
-
-  if (min < max) {
-    return Math.round(rand);
+  if (min > max) {
+    return new Error('Неверно указан числовой диапазон');
   }
-  return new Error('Неверно указан числовой диапазон')
+  const random = min - 0.5 + Math.random() * (max + 1 - min);
+  return Math.round(random);
 }
 
-alert(randomInteger(110, 10));
+alert(randomInteger(0, 10));
 
 
 const randomFloatNumber = (min, max, floatPoint) => {
-  const randomFloat = Math.random() * (max - min) + min;
-
-  if (min < max) {
-    return randomFloat.toFixed(floatPoint);
+  if (min > max) {
+    return new Error('Неверно указан числовой диапазон');
   }
-  return new Error('Неверно указан числовой диапазон')
+  const randomFloat = Math.random() * (max - min) + min;
+  return randomFloat.toFixed(floatPoint);
 }
 
 alert(randomFloatNumber(0, 10, 4));
