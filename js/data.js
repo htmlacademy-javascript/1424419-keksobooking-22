@@ -112,6 +112,6 @@ const getOffer = () => {
   };
 };
 
-const createOffer = new Array(ARRAY_LENGTH).fill(null).map(getOffer);
+const createOffer = () => new Array(ARRAY_LENGTH).fill(null).map(getOffer);
 
-createOffer;
+export {createOffer};
