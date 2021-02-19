@@ -11,13 +11,13 @@ const priceFlat = adForm.querySelector('#price');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 
-
 const validatePrice = () => {
-  typeFlat.addEventListener('change', () => {
-    priceFlat.placeholder = MIN_HOUSE_PRICE[typeFlat.value];
-    priceFlat.min = MIN_HOUSE_PRICE[typeFlat.value];
-  });
+  priceFlat.placeholder = MIN_HOUSE_PRICE[typeFlat.value];
+  priceFlat.min = MIN_HOUSE_PRICE[typeFlat.value];
+  priceFlat.required = true;
 };
+
+typeFlat.addEventListener('change', validatePrice);
 
 const validateCheckIn = () => {
   timeIn.addEventListener('change', () => timeOut.value = timeIn.value);
