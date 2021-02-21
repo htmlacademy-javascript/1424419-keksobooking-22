@@ -1,7 +1,6 @@
 import {createOffer} from './data.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-const mapCanvas = document.querySelector('#map-canvas');
 
 const similarCard = createOffer();
 
@@ -43,4 +42,5 @@ const generateCard = ({author, offer}) => {
 const generateCards = similarCard.map(generateCard);
 const generateCardsFragment = document.createDocumentFragment();
 generateCardsFragment.appendChild(generateCards[0]);
-mapCanvas.appendChild(generateCardsFragment);
+
+export {similarCard, generateCard};

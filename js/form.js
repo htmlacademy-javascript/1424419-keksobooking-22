@@ -10,6 +10,24 @@ const typeFlat = adForm.querySelector('#type');
 const priceFlat = adForm.querySelector('#price');
 const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
+const fieldsets = adForm.querySelectorAll('fieldset');
+const address = adForm.querySelector('#address');
+
+const disableForm = () => {
+  adForm.classList.add('ad-form--disabled');
+  for (let fieldset of fieldsets) {
+    fieldset.disabled = true;
+  }
+};
+
+disableForm();
+
+const activeForm =() => {
+  adForm.classList.remove('ad-form--disabled');
+  for (let fieldset of fieldsets) {
+    fieldset.disabled = false;
+  }
+};
 
 const validatePrice = () => {
   priceFlat.placeholder = MIN_HOUSE_PRICE[typeFlat.value];
@@ -24,5 +42,9 @@ const validateCheckIn = () => {
   timeOut.addEventListener('change', () => timeIn.value = timeOut.value);
 };
 
+
+
 validatePrice();
 validateCheckIn();
+
+export {activeForm, address};
