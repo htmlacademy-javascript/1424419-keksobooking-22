@@ -1,23 +1,23 @@
-import {activeFilter} from './filters.js';
-import {activeForm, address} from './form.js';
+import {activateFilter} from './filters.js';
+import {activateForm, address} from './form.js';
 import {similarCard, generateCard} from './card.js';
 
-const COORDINATES = {
-  lat: 35.65841,
-  lng: 139.78145,
+const Coordinates = {
+  LAT: 35.65841,
+  LNG: 139.78145,
 };
 
 /* global L:readonly */
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    activeFilter();
-    activeForm();
-    address.value = `${COORDINATES.lat}, ${COORDINATES.lng}`
+    activateFilter();
+    activateForm();
+    address.value = `${Coordinates.LAT}, ${Coordinates.LNG}`
   })
   .setView({
-    lat: COORDINATES.lat,
-    lng: COORDINATES.lng,
+    lat: Coordinates.LAT,
+    lng: Coordinates.LNG,
   }, 12);
 
 L.tileLayer(
@@ -35,8 +35,8 @@ const mainPinMarker = L.icon({
 
 const mainMarker = L.marker(
   {
-    lat: COORDINATES.lat,
-    lng: COORDINATES.lng,
+    lat: Coordinates.LAT,
+    lng: Coordinates.LNG,
   },
   {
     draggable: true,

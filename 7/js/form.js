@@ -13,6 +13,8 @@ const timeOut = adForm.querySelector('#timeout');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const address = adForm.querySelector('#address');
 
+address.readOnly = true;
+
 const disableForm = () => {
   adForm.classList.add('ad-form--disabled');
   for (let fieldset of fieldsets) {
@@ -22,7 +24,7 @@ const disableForm = () => {
 
 disableForm();
 
-const activeForm =() => {
+const activateForm =() => {
   adForm.classList.remove('ad-form--disabled');
   for (let fieldset of fieldsets) {
     fieldset.disabled = false;
@@ -47,4 +49,4 @@ const validateCheckIn = () => {
 validatePrice();
 validateCheckIn();
 
-export {activeForm, address};
+export {activateForm, address};
