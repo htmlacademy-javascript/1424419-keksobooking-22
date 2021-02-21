@@ -12,7 +12,7 @@ const disableFilter = () => {
 
 disableFilter();
 
-const activeFilter = () => {
+const activateFilter = () => {
   filterForm.classList.remove('map__filters--disabled');
   featuresFilter.disabled = false;
   for (let select of selectsFilter) {
@@ -20,4 +20,4 @@ const activeFilter = () => {
   }
 };
 
-export {activeFilter};
+export {activateFilter};
