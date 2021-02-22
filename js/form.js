@@ -5,6 +5,13 @@ const MIN_HOUSE_PRICE = {
   palace: 10000,
 };
 
+const ROOM_CAPACITY = {
+  '1': ['1'],
+  '2': ['1', '2'],
+  '3': ['1', '2', '3'],
+  '100': ['0'],
+};
+
 const adForm = document.querySelector('.ad-form');
 const typeFlat = adForm.querySelector('#type');
 const priceFlat = adForm.querySelector('#price');
@@ -12,8 +19,8 @@ const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 const fieldsets = adForm.querySelectorAll('fieldset');
 const address = adForm.querySelector('#address');
-
-address.readOnly = true;
+const rooms = adForm.querySelector('#room_number');
+const capacity = adForm.querySelector('#capacity');
 
 const disableForm = () => {
   adForm.classList.add('ad-form--disabled');
@@ -34,7 +41,6 @@ const activateForm =() => {
 const validatePrice = () => {
   priceFlat.placeholder = MIN_HOUSE_PRICE[typeFlat.value];
   priceFlat.min = MIN_HOUSE_PRICE[typeFlat.value];
-  priceFlat.required = true;
 };
 
 typeFlat.addEventListener('change', validatePrice);
@@ -44,7 +50,26 @@ const validateCheckIn = () => {
   timeOut.addEventListener('change', () => timeIn.value = timeOut.value);
 };
 
+const validateCapacity = (peopleAmount) => {
+  const capacityOptions = capacity.querySelectorAll('option');
 
+  capacityOptions.forEach((option) => {
+    option.disabled = true;
+  });
+
+  ROOM_CAPACITY[peopleAmount].forEach((seatsAmount) => {
+    capacityOptions.forEach((option) => {
+      if (option.value === seatsAmount) {
+        option.disabled = false;
+        option.selected = true;
+      }
+    });
+  });
+};
+
+rooms.addEventListener('change', () => {
+  validateCapacity(rooms.value);
+});
 
 validatePrice();
 validateCheckIn();
