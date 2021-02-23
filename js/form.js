@@ -71,6 +71,10 @@ rooms.addEventListener('change', () => {
   validateCapacity(rooms.value);
 });
 
+capacity.addEventListener('focus', () => {
+  validateCapacity(rooms.value);
+});
+
 validatePrice();
 validateCheckIn();
 
