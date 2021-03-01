@@ -1,10 +1,16 @@
 import {activateFilter} from './filters.js';
-import {activateForm, address} from './form.js';
+import {activateForm, address, validatePrice, validateCheckIn} from './form.js';
 import {similarCard, generateCard} from './card.js';
 
-const Coordinates = {
-  LAT: 35.65841,
-  LNG: 139.78145,
+const COORDINATES = {
+  lat: 35.65841,
+  lng: 139.78145,
+};
+
+const ZOOM = 12;
+
+const setDefaultAddress = () => {
+  address.value = `${COORDINATES.lat}, ${COORDINATES.lng}`
 };
 
 /* global L:readonly */
@@ -13,12 +19,14 @@ const map = L.map('map-canvas')
   .on('load', () => {
     activateFilter();
     activateForm();
-    address.value = `${Coordinates.LAT}, ${Coordinates.LNG}`
+    validatePrice(),
+    validateCheckIn(),
+    setDefaultAddress();
   })
   .setView({
-    lat: Coordinates.LAT,
-    lng: Coordinates.LNG,
-  }, 12);
+    lat: COORDINATES.lat,
+    lng: COORDINATES.lng,
+  }, ZOOM);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -35,8 +43,8 @@ const mainPinMarker = L.icon({
 
 const mainMarker = L.marker(
   {
-    lat: Coordinates.LAT,
-    lng: Coordinates.LNG,
+    lat: COORDINATES.lat,
+    lng: COORDINATES.lng,
   },
   {
     draggable: true,
@@ -71,3 +79,11 @@ similarCard.forEach((card) => {
     .addTo(map)
     .bindPopup(generateCard(card));
 });
+
+const resetMapCondition = () => {
+  map.setView(COORDINATES, ZOOM);
+  mainMarker.setLatLng(COORDINATES);
+  setDefaultAddress();
+};
+
+export {resetMapCondition};
