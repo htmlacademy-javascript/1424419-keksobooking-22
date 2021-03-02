@@ -1,6 +1,6 @@
 import {activateFilter} from './filters.js';
 import {activateForm, address, validatePrice, validateCheckIn} from './form.js';
-import {similarCard, generateCard} from './card.js';
+import {generateCard} from './card.js';
 
 const COORDINATES = {
   lat: 35.65841,
@@ -64,21 +64,24 @@ const anotherPin = L.icon({
   iconAnchor: [20, 40],
 });
 
-similarCard.forEach((card) => {
-  const anotherMarker = L.marker(
-    {
-      lat: card.location.x,
-      lng: card.location.y,
-    },
-    {
-      icon: anotherPin,
-    },
-  );
+const renderOffersOnMap = (offers) => {
+  offers.forEach((offer) => {
 
-  anotherMarker
-    .addTo(map)
-    .bindPopup(generateCard(card));
-});
+    const anotherMarker = L.marker(
+      {
+        lat: offer.location.lat,
+        lng: offer.location.lng,
+      },
+      {
+        icon: anotherPin,
+      },
+    );
+
+    anotherMarker
+      .addTo(map)
+      .bindPopup(generateCard(offer));
+  });
+};
 
 const resetMapCondition = () => {
   map.setView(COORDINATES, ZOOM);
@@ -86,4 +89,4 @@ const resetMapCondition = () => {
   setDefaultAddress();
 };
 
-export {resetMapCondition};
+export {resetMapCondition, renderOffersOnMap};
