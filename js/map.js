@@ -64,21 +64,24 @@ const anotherPin = L.icon({
   iconAnchor: [20, 40],
 });
 
-similarCard.forEach((card) => {
-  const anotherMarker = L.marker(
-    {
-      lat: card.location.x,
-      lng: card.location.y,
-    },
-    {
-      icon: anotherPin,
-    },
-  );
+const renderOffersOnMap = (offers) => {
+  offers.forEach((offer) => {
 
-  anotherMarker
-    .addTo(map)
-    .bindPopup(generateCard(card));
-});
+    const anotherMarker = L.marker(
+      {
+        lat: offer.location.lat, // x, y параметров больше нет, в серверных данных это lat, lng
+        lng: offer.location.lng,
+      },
+      {
+        icon: anotherPin,
+      },
+    );
+
+    anotherMarker
+      .addTo(map)
+      .bindPopup(generateCard(offer));
+  });
+}
 
 const resetMapCondition = () => {
   map.setView(COORDINATES, ZOOM);
@@ -86,4 +89,4 @@ const resetMapCondition = () => {
   setDefaultAddress();
 };
 
-export {resetMapCondition};
+export {resetMapCondition, renderOffersOnMap};

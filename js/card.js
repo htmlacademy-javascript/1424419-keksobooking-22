@@ -45,10 +45,6 @@ const generateCard = ({author, offer}) => {
   return cardElement;
 };
 
-const generateCards = similarCard.map(generateCard);
-const generateCardsFragment = document.createDocumentFragment();
-generateCardsFragment.appendChild(generateCards[0]);
-
 /*const clearGenerateCard = () => {
   cardTemplate.innerHTML = '';
 };*/

@@ -7,6 +7,7 @@ const getData = (onSuccess) => {
   fetch(RECEIVING_LINK)
     .then((response) => response.json())
     .catch(showAlert)
+    .then(onSuccess)
 };
 
 const sendData = (onSuccess, onFail, body) => {
