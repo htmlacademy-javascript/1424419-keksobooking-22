@@ -20,4 +20,4 @@ const activateFilter = () => {
   }
 };
 
-export {activateFilter};
+export {activateFilter, filterForm};

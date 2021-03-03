@@ -1,3 +1,8 @@
+import {sendData} from './api.js';
+import {filterForm} from './filters.js';
+import {resetMap} from './main.js';
+import {openErrorPopup, openSuccessPopup} from './popup.js';
+
 const MIN_HOUSE_PRICE = {
   bungalow: 0,
   flat: 1000,
@@ -21,6 +26,9 @@ const fieldsets = adForm.querySelectorAll('fieldset');
 const address = adForm.querySelector('#address');
 const rooms = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
+const resetButton = adForm.querySelector('.ad-form__reset');
+
+
 
 const disableForm = () => {
   adForm.classList.add('ad-form--disabled');
@@ -75,7 +83,31 @@ capacity.addEventListener('focus', () => {
   validateCapacity(rooms.value);
 });
 
-validatePrice();
-validateCheckIn();
+const resetForm = () => {
+  adForm.reset();
+  filterForm.reset();
+  resetMap();
+};
 
-export {activateForm, address};
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetForm();
+});
+
+const setUserFormSubmit = (onSuccess) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(openSuccessPopup()),
+      () => openErrorPopup(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+setUserFormSubmit(resetForm);
+
+
+export {activateForm, address,validatePrice, validateCheckIn, setUserFormSubmit};

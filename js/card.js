@@ -1,8 +1,4 @@
-import {createOffer} from './data.js';
-
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-
-const similarCard = createOffer();
 
 const HOUSE_TYPE = {
   flat: 'Квартира',
@@ -10,6 +6,7 @@ const HOUSE_TYPE = {
   house: 'Дом',
   palace: 'Дворец ',
 };
+
 
 const generateCard = ({author, offer}) => {
   const cardElement = cardTemplate.cloneNode(true);
@@ -39,8 +36,4 @@ const generateCard = ({author, offer}) => {
   return cardElement;
 };
 
-const generateCards = similarCard.map(generateCard);
-const generateCardsFragment = document.createDocumentFragment();
-generateCardsFragment.appendChild(generateCards[0]);
-
-export {similarCard, generateCard};
+export {generateCard};
