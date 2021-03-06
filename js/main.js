@@ -8,9 +8,12 @@ import './api.js';
 import './popup.js';
 import {resetMapCondition, renderOffersOnMap} from './map.js';
 import {getData} from './api.js';
+import {setChangeFilter, setResetFilter} from './filters.js';
 
 getData((offers) =>{
   renderOffersOnMap(offers);
+  setChangeFilter(() => renderOffersOnMap(offers));
+  setResetFilter(() => renderOffersOnMap(offers));
 });
 
 const resetMap = () => {
