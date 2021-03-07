@@ -66,6 +66,13 @@ const anotherPin = L.icon({
   iconAnchor: [20, 40],
 });
 
+let markers = [];
+
+const removeMarkers = () => {
+  markers.forEach((marker) => map.removeLayer(marker));
+  markers = [];
+};
+
 const renderOffersOnMap = (offers) => {
   offers
     .slice()
@@ -86,6 +93,7 @@ const renderOffersOnMap = (offers) => {
       anotherMarker
         .addTo(map)
         .bindPopup(generateCard(offer));
+      markers.push(anotherMarker);
     });
 };
 
@@ -95,4 +103,4 @@ const resetMapCondition = () => {
   setDefaultAddress();
 };
 
-export {resetMapCondition, renderOffersOnMap};
+export {resetMapCondition, renderOffersOnMap, removeMarkers};

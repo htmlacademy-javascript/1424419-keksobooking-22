@@ -9,69 +9,59 @@ const housingGuests = filterForm.querySelector('#housing-guests');
 const DEFAULT_VALUE = 'any';
 
 const PriceValue = {
-  LOW_PRICE: 10000,
-  HIGH_PRICE: 50000,
+  LOW: 10000,
+  HIGH: 50000,
 };
 
-const filterByType = (data) => {
-  return  housingType.value === DEFAULT_VALUE || housingType.value === data.offer.type;
+const filterByType = ({offer: {type}}) => {
+  return housingType.value === DEFAULT_VALUE || housingType.value === type;
 };
 
-const filterByRooms = (data) => {
-  return  housingRooms.value === DEFAULT_VALUE || Number(housingRooms.value) === data.offer.rooms;
-};
-const filterByGuests = (data) => {
-  return  housingGuests.value === DEFAULT_VALUE || Number(housingGuests.value) === data.offer.guests;
+const filterByRooms = ({offer: {rooms}}) => {
+  return housingRooms.value === DEFAULT_VALUE || Number(housingRooms.value) === rooms;
 };
 
-const filterByPrice = (data) => {
+const filterByGuests = ({offer: {guests}}) => {
+  return housingGuests.value === DEFAULT_VALUE || Number(housingGuests.value) === guests;
+};
+
+const filterByPrice = ({offer: {price}}) => {
   switch (housingPrice.value) {
     case DEFAULT_VALUE:
-      return data;
+      return true;
     case 'middle':
-      return data.offer.price >= PriceValue.LOW_PRICE && data.offer.price <= PriceValue.HIGH_PRICE;
+      return price >= PriceValue.LOW && price <= PriceValue.HIGH;
     case 'low':
-      return  data.offer.price < PriceValue.LOW_PRICE;
+      return price < PriceValue.LOW;
     case 'high':
-      return data.offer.price >= PriceValue.HIGH_PRICE;
+      return price >= PriceValue.HIGH;
   }
 };
 
-const filterByFeatures = (data) => {
-  let result = true;
+const filterByFeatures = ({offer: {features}}) => {
+  const checkedFeatures = featuresFilter.querySelectorAll('input:checked');
 
-  const features = featuresFilter.querySelectorAll('input:checked');
-
-  features.forEach((feature) => {
-    if (data.offer.features.indexOf(feature.value) === -1) {
-      result = false;
-    }
+  return Array.from(checkedFeatures).every((feature) => {
+    return features.includes(feature.value);
   });
-
-  return result;
 };
 
-const filterOffers = (data) => {
-
+const filterOffers = (offer) => {
   return (
-    filterByType(data) &&
-    filterByRooms(data) &&
-    filterByGuests(data) &&
-    filterByPrice(data) &&
-    filterByFeatures(data)
-  )
+    filterByType(offer) &&
+    filterByRooms(offer) &&
+    filterByGuests(offer) &&
+    filterByPrice(offer) &&
+    filterByFeatures(offer)
+  );
 };
 
 const setResetFilter = (cb) => {
-  filterForm.addEventListener('reset', () => {
-    cb();
-  });
+  filterForm.addEventListener('reset', () => cb());
 };
 
 const setChangeFilter = (cb) => {
-  filterForm.addEventListener('change', () => {
-    cb()
-  });
+  filterForm.addEventListener('change', () => cb());
 };
 
 const disableFilter = () => {
@@ -92,4 +82,4 @@ const activateFilter = () => {
   }
 };
 
-export {activateFilter, filterForm, setResetFilter, setChangeFilter, filterOffers};
+export { activateFilter, filterForm, setResetFilter, setChangeFilter, filterOffers };
