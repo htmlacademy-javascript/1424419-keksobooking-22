@@ -6,13 +6,16 @@ import './filters.js';
 import './map.js';
 import './api.js';
 import './popup.js';
-import {resetMapCondition, renderOffersOnMap} from './map.js';
+import {resetMapCondition, renderOffersOnMap, clearMarkers} from './map.js';
 import {getData} from './api.js';
 import {setChangeFilter, setResetFilter} from './filters.js';
 
 getData((offers) =>{
   renderOffersOnMap(offers);
-  setChangeFilter(() => renderOffersOnMap(offers));
+  setChangeFilter(() => {
+    clearMarkers();
+    renderOffersOnMap(offers);
+  });
   setResetFilter(() => renderOffersOnMap(offers));
 });
 

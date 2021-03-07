@@ -16,7 +16,7 @@ const setDefaultAddress = () => {
 };
 
 /* global L:readonly */
-
+let markers = [];
 const map = L.map('map-canvas')
   .on('load', () => {
     activateFilter();
@@ -86,8 +86,18 @@ const renderOffersOnMap = (offers) => {
       anotherMarker
         .addTo(map)
         .bindPopup(generateCard(offer));
+
+      markers.push(anotherMarker);
     });
 };
+
+const clearMarkers = () => {
+  markers.forEach((marker) => {
+    map.removeLayer(marker);
+  });
+
+  markers = [];
+}
 
 const resetMapCondition = () => {
   map.setView(COORDINATES, ZOOM);
@@ -95,4 +105,4 @@ const resetMapCondition = () => {
   setDefaultAddress();
 };
 
-export {resetMapCondition, renderOffersOnMap};
+export {resetMapCondition, renderOffersOnMap, clearMarkers};
