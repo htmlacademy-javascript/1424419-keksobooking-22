@@ -1,3 +1,5 @@
+import {resetButton} from './form.js'
+
 const filterForm = document.querySelector('.map__filters');
 const selectsFilter = filterForm.querySelectorAll('select');
 const featuresFilter = filterForm.querySelector('#housing-features');
@@ -57,7 +59,7 @@ const filterOffers = (offer) => {
 };
 
 const setResetFilter = (cb) => {
-  filterForm.addEventListener('reset', () => cb());
+  resetButton.addEventListener('click', () => cb());
 };
 
 const setChangeFilter = (cb) => {
