@@ -54,7 +54,7 @@ const filterOffers = ({offer}) => {
     filterByRooms(offer.rooms) &&
     filterByGuests(offer.guests) &&
     filterByPrice(offer.price) &&
-    filterByFeatures(offer.feature)
+    filterByFeatures(offer.features)
   );
 };
 
