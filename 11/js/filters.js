@@ -1,3 +1,5 @@
+import {resetButton} from './form.js'
+
 const filterForm = document.querySelector('.map__filters');
 const selectsFilter = filterForm.querySelectorAll('select');
 const featuresFilter = filterForm.querySelector('#housing-features');
@@ -13,19 +15,19 @@ const PriceValue = {
   HIGH: 50000,
 };
 
-const filterByType = ({offer: {type}}) => {
+const filterByType = (type) => {
   return housingType.value === DEFAULT_VALUE || housingType.value === type;
 };
 
-const filterByRooms = ({offer: {rooms}}) => {
+const filterByRooms = (rooms) => {
   return housingRooms.value === DEFAULT_VALUE || Number(housingRooms.value) === rooms;
 };
 
-const filterByGuests = ({offer: {guests}}) => {
+const filterByGuests = (guests) => {
   return housingGuests.value === DEFAULT_VALUE || Number(housingGuests.value) === guests;
 };
 
-const filterByPrice = ({offer: {price}}) => {
+const filterByPrice = (price) => {
   switch (housingPrice.value) {
     case DEFAULT_VALUE:
       return true;
@@ -38,7 +40,7 @@ const filterByPrice = ({offer: {price}}) => {
   }
 };
 
-const filterByFeatures = ({offer: {features}}) => {
+const filterByFeatures = (features) => {
   const checkedFeatures = featuresFilter.querySelectorAll('input:checked');
 
   return Array.from(checkedFeatures).every((feature) => {
@@ -46,18 +48,18 @@ const filterByFeatures = ({offer: {features}}) => {
   });
 };
 
-const filterOffers = (offer) => {
+const filterOffers = ({offer}) => {
   return (
-    filterByType(offer) &&
-    filterByRooms(offer) &&
-    filterByGuests(offer) &&
-    filterByPrice(offer) &&
-    filterByFeatures(offer)
+    filterByType(offer.type) &&
+    filterByRooms(offer.rooms) &&
+    filterByGuests(offer.guests) &&
+    filterByPrice(offer.price) &&
+    filterByFeatures(offer.feature)
   );
 };
 
 const setResetFilter = (cb) => {
-  filterForm.addEventListener('reset', () => cb());
+  resetButton.addEventListener('click', () => cb());
 };
 
 const setChangeFilter = (cb) => {
