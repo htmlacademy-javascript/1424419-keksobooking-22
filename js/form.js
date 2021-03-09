@@ -110,4 +110,4 @@ const setUserFormSubmit = (onSuccess) => {
 setUserFormSubmit(resetForm);
 
 
-export {activateForm, address,validatePrice, validateCheckIn, setUserFormSubmit};
+export {activateForm, address,validatePrice, validateCheckIn, setUserFormSubmit, resetButton};

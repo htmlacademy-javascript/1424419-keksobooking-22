@@ -1,4 +1,4 @@
-import {activateFilter} from './filters.js';
+import {activateFilter, filterOffers} from './filters.js';
 import {activateForm, address, validatePrice, validateCheckIn} from './form.js';
 import {generateCard} from './card.js';
 
@@ -8,6 +8,8 @@ const COORDINATES = {
 };
 
 const ZOOM = 12;
+
+const OFFERS_COUNT = 10;
 
 const setDefaultAddress = () => {
   address.value = `${COORDINATES.lat}, ${COORDINATES.lng}`
@@ -64,23 +66,35 @@ const anotherPin = L.icon({
   iconAnchor: [20, 40],
 });
 
+let markers = [];
+
+const removeMarkers = () => {
+  markers.forEach((marker) => map.removeLayer(marker));
+  markers = [];
+};
+
 const renderOffersOnMap = (offers) => {
-  offers.forEach((offer) => {
+  offers
+    .slice()
+    .filter(filterOffers)
+    .slice(0, OFFERS_COUNT)
+    .forEach((offer) => {
 
-    const anotherMarker = L.marker(
-      {
-        lat: offer.location.lat,
-        lng: offer.location.lng,
-      },
-      {
-        icon: anotherPin,
-      },
-    );
+      const anotherMarker = L.marker(
+        {
+          lat: offer.location.lat,
+          lng: offer.location.lng,
+        },
+        {
+          icon: anotherPin,
+        },
+      );
 
-    anotherMarker
-      .addTo(map)
-      .bindPopup(generateCard(offer));
-  });
+      anotherMarker
+        .addTo(map)
+        .bindPopup(generateCard(offer));
+      markers.push(anotherMarker);
+    });
 };
 
 const resetMapCondition = () => {
@@ -89,4 +103,4 @@ const resetMapCondition = () => {
   setDefaultAddress();
 };
 
-export {resetMapCondition, renderOffersOnMap};
+export {resetMapCondition, renderOffersOnMap, removeMarkers};
