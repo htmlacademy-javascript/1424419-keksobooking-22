@@ -7,6 +7,7 @@ import './filters.js';
 import './map.js';
 import './api.js';
 import './popup.js';
+import './pictures.js'
 import {resetMapCondition, renderOffersOnMap, removeMarkers} from './map.js';
 import {getData} from './api.js';
 import {setChangeFilter, setResetFilter} from './filters.js';
