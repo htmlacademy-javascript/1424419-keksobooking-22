@@ -1,3 +1,4 @@
+/* global _:readonly */
 import './util.js';
 import './data.js';
 import './card.js';
@@ -10,12 +11,14 @@ import {resetMapCondition, renderOffersOnMap, removeMarkers} from './map.js';
 import {getData} from './api.js';
 import {setChangeFilter, setResetFilter} from './filters.js';
 
+const RERENDER_DELAY = 500;
+
 getData((offers) =>{
   renderOffersOnMap(offers);
-  setChangeFilter(() => {
+  setChangeFilter(_.debounce(() => {
     removeMarkers();
     renderOffersOnMap(offers);
-  });
+  }, RERENDER_DELAY));
   setResetFilter(() => renderOffersOnMap(offers));
 });
 
