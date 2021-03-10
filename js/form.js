@@ -1,6 +1,7 @@
 import {sendData} from './api.js';
 import {filterForm} from './filters.js';
 import {resetMap} from './main.js';
+import {resetPictures} from './pictures.js';
 import {openErrorPopup, openSuccessPopup} from './popup.js';
 
 const MIN_HOUSE_PRICE = {
@@ -87,6 +88,7 @@ const resetForm = () => {
   adForm.reset();
   filterForm.reset();
   resetMap();
+  resetPictures();
 };
 
 
