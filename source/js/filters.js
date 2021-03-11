@@ -1,5 +1,12 @@
 import {resetButton} from './form.js'
 
+const DEFAULT_VALUE = 'any';
+
+const PriceValue = {
+  LOW: 10000,
+  HIGH: 50000,
+};
+
 const filterForm = document.querySelector('.map__filters');
 const selectsFilter = filterForm.querySelectorAll('select');
 const featuresFilter = filterForm.querySelector('#housing-features');
@@ -7,13 +14,6 @@ const housingType = filterForm.querySelector('#housing-type');
 const housingPrice = filterForm.querySelector('#housing-price');
 const housingRooms = filterForm.querySelector('#housing-rooms');
 const housingGuests = filterForm.querySelector('#housing-guests');
-
-const DEFAULT_VALUE = 'any';
-
-const PriceValue = {
-  LOW: 10000,
-  HIGH: 50000,
-};
 
 const filterByType = (type) => {
   return housingType.value === DEFAULT_VALUE || housingType.value === type;

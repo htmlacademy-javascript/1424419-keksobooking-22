@@ -12,16 +12,16 @@ const avatarPreview = document.querySelector('.ad-form-header__preview img');
 const houseFileChooser = document.querySelector('.ad-form__input');
 const housePreview = document.querySelector('.ad-form__photo');
 
-const setPreviewPhoto = (FileChoose, previewElement) => {
-  FileChoose.addEventListener('change', () => {
-    const file = FileChoose.files[0];
+const setPreviewPhoto = (fileChoose, previewElement) => {
+  fileChoose.addEventListener('change', () => {
+    const file = fileChoose.files[0];
     const fileName = file.name.toLowerCase();
 
-    const matches = FILE_TYPES.some((it) => {
+    const inCorrectExtension = FILE_TYPES.some((it) => {
       return fileName.endsWith(it);
     });
 
-    if (matches) {
+    if (inCorrectExtension) {
       const reader = new FileReader();
 
       reader.addEventListener('load', () => {
