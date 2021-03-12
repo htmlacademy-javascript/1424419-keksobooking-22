@@ -1,5 +1,3 @@
-const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-
 const HOUSE_TYPE = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -7,6 +5,7 @@ const HOUSE_TYPE = {
   palace: 'Дворец ',
 };
 
+const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const generateCard = ({author, offer}) => {
   const cardElement = cardTemplate.cloneNode(true);
