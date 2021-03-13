@@ -1,4 +1,3 @@
-/* global _:readonly */
 import './util.js';
 import './card.js';
 import './form.js';
@@ -7,6 +6,8 @@ import './map.js';
 import './api.js';
 import './popup.js';
 import './pictures.js'
+import 'leaflet/dist/leaflet.css';
+import * as _ from 'lodash';
 import {resetMapCondition, renderOffersOnMap, removeMarkers} from './map.js';
 import {getData} from './api.js';
 import {setChangeFilter, setResetFilter} from './filters.js';

@@ -1,5 +1,6 @@
+import L from 'leaflet';
 import {activateFilter, filterOffers} from './filters.js';
-import {activateForm, address, validatePrice, validateCheckIn} from './form.js';
+import {activateForm, address, selectChangeHandler, validateCheckIn} from './form.js';
 import {generateCard} from './card.js';
 
 const COORDINATES = {
@@ -13,13 +14,11 @@ const setDefaultAddress = () => {
   address.value = `${COORDINATES.lat}, ${COORDINATES.lng}`
 };
 
-/* global L:readonly */
-
 const map = L.map('map-canvas')
   .on('load', () => {
     activateFilter();
     activateForm();
-    validatePrice();
+    selectChangeHandler();
     validateCheckIn();
     setDefaultAddress();
   })
