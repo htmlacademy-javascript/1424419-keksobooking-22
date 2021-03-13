@@ -2,6 +2,8 @@ import {resetButton} from './form.js'
 
 const DEFAULT_VALUE = 'any';
 
+const OFFERS_COUNT = 10;
+
 const PriceValue = {
   LOW: 10000,
   HIGH: 50000,
@@ -48,14 +50,27 @@ const filterByFeatures = (features) => {
   });
 };
 
-const filterOffers = ({offer}) => {
-  return (
-    filterByType(offer.type) &&
-    filterByRooms(offer.rooms) &&
-    filterByGuests(offer.guests) &&
-    filterByPrice(offer.price) &&
-    filterByFeatures(offer.features)
-  );
+const filterOffers = (offers) => {
+  const appropriateOffers = [];
+  for (let offer of offers) {
+    const {type, rooms, guests, price, features} = offer.offer;
+
+    if (
+      filterByType(type) &&
+      filterByRooms(rooms) &&
+      filterByGuests(guests) &&
+      filterByPrice(price) &&
+      filterByFeatures(features)
+    ) {
+      appropriateOffers.push(offer);
+    }
+
+    if (appropriateOffers.length >= OFFERS_COUNT) {
+      return appropriateOffers;
+    }
+  }
+
+  return appropriateOffers;
 };
 
 const setResetFilter = (cb) => {
