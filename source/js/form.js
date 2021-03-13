@@ -47,19 +47,19 @@ const activateForm =() => {
   }
 };
 
-const validatePrice = () => {
+const selectChangeHandler = () => {
   priceFlat.placeholder = MIN_HOUSE_PRICE[typeFlat.value];
   priceFlat.min = MIN_HOUSE_PRICE[typeFlat.value];
 };
 
-typeFlat.addEventListener('change', validatePrice);
+typeFlat.addEventListener('change', selectChangeHandler);
 
 const validateCheckIn = () => {
   timeIn.addEventListener('change', () => timeOut.value = timeIn.value);
   timeOut.addEventListener('change', () => timeIn.value = timeOut.value);
 };
 
-const validateCapacity = (peopleAmount) => {
+const capacityValidateHandler = (peopleAmount) => {
   const capacityOptions = capacity.querySelectorAll('option');
 
   capacityOptions.forEach((option) => {
@@ -77,11 +77,11 @@ const validateCapacity = (peopleAmount) => {
 };
 
 rooms.addEventListener('change', () => {
-  validateCapacity(rooms.value);
+  capacityValidateHandler(rooms.value);
 });
 
 capacity.addEventListener('focus', () => {
-  validateCapacity(rooms.value);
+  capacityValidateHandler(rooms.value);
 });
 
 const resetForm = () => {
@@ -112,4 +112,4 @@ const setUserFormSubmit = (onSuccess) => {
 setUserFormSubmit(resetForm);
 
 
-export {activateForm, address,validatePrice, validateCheckIn, setUserFormSubmit, resetButton};
+export {activateForm, address,selectChangeHandler, validateCheckIn, setUserFormSubmit, resetButton};
