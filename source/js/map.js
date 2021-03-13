@@ -9,8 +9,6 @@ const COORDINATES = {
 
 const ZOOM = 12;
 
-const OFFERS_COUNT = 10;
-
 const setDefaultAddress = () => {
   address.value = `${COORDINATES.lat}, ${COORDINATES.lng}`
 };
@@ -21,8 +19,8 @@ const map = L.map('map-canvas')
   .on('load', () => {
     activateFilter();
     activateForm();
-    validatePrice(),
-    validateCheckIn(),
+    validatePrice();
+    validateCheckIn();
     setDefaultAddress();
   })
   .setView({
@@ -74,12 +72,8 @@ const removeMarkers = () => {
 };
 
 const renderOffersOnMap = (offers) => {
-  offers
-    .slice()
-    .filter(filterOffers)
-    .slice(0, OFFERS_COUNT)
+  filterOffers(offers.slice())
     .forEach((offer) => {
-
       const anotherMarker = L.marker(
         {
           lat: offer.location.lat,
