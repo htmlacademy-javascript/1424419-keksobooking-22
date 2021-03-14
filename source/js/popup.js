@@ -9,7 +9,7 @@ const closeErrorButton = newErrorPopup.querySelector('.error__button');
 const onPopupKeyDown = (evt) => {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
     evt.preventDefault();
-    OnPopupClose();
+    onPopupClose();
   }
 };
 
@@ -23,7 +23,7 @@ const openErrorPopup = () => {
   document.addEventListener('click', onPopupKeyDown);
 };
 
-const OnPopupClose = () => {
+const onPopupClose = () => {
   if (main.contains(newSuccessPopup)) {
     main.removeChild(newSuccessPopup);
   }
@@ -35,8 +35,8 @@ const OnPopupClose = () => {
   document.removeEventListener('keydown', onPopupKeyDown);
 };
 
-closeErrorButton.addEventListener('click', OnPopupClose);
+closeErrorButton.addEventListener('click', onPopupClose);
 
-main.addEventListener('click', OnPopupClose);
+main.addEventListener('click', onPopupClose);
 
 export {openSuccessPopup, openErrorPopup};

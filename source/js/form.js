@@ -89,8 +89,8 @@ const resetForm = () => {
   filterForm.reset();
   resetMap();
   resetPictures();
+  selectChangeHandler();
 };
-
 
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
